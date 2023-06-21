@@ -14,6 +14,7 @@
 string nameAdministrador;
 using namespace std;
 string codigo;
+string auxCODE,auxNOMBRE;
 bitacora bit;
 void usuario::menuAdministrador()
 {
@@ -216,7 +217,7 @@ void usuario::insertarAdministrador()
         menuReportes();
         break;
     case 3:
-
+        Compra();
 		break;
 	case 4:
 	    system("cls");
@@ -272,6 +273,7 @@ void usuario::menuReportes()
     cout << "                 | 2. Bitacora                   |"<< endl;
     cout << "                 | 3. Regresar al menu anterior  |"<< endl;
     cout << "                 | 4. Salir del sistema          |"<< endl;
+    cout << "                 | 5. Compras                    |"<< endl;
     cout << "                 |                               |"<< endl;
     cout << "                 *===============================*"<< endl;
     cout << "                      Ingresa una Opcion: ";
@@ -281,7 +283,11 @@ void usuario::menuReportes()
     case 1:
         desplegarClientes();
 		break;
+		case 5:
+        desplegarCompras();
+		break;
     case 2:
+
         bit.desplegarBitacora(nameAdministrador,"7500");
         break;
     case 3:
@@ -658,4 +664,144 @@ void usuario::menuClientes()
 	}
 	getch();
     }while(Opciones!= 6);
+}
+void usuario::Compra()
+{
+    int total;
+    system("cls");
+	fstream file;
+	int found = 0;
+	file.open("Clientes.txt",ios::in);
+	if(!file)
+	{
+
+		cout << "\n-------------------------Datos del Clientes buscada------------------------" << endl;
+		cout << "\n\t\t\tNo hay informacion...";
+	}
+	else
+	{
+		string user_ID;
+        cout << "" << endl;
+        cout << "\t\t    Nombre Administrador: " << nameAdministrador << endl;
+		cout << "          __^__                                      __^__"<< endl;
+        cout << "         ( ___ )------------------------------------( ___ )"<< endl;
+        cout << "          | / |                                      | / |"<< endl;
+        cout << "          | / |     Datos del Clientes buscado     | / |"<< endl;
+        cout << "          |___|                                      |___|"<< endl;
+        cout << "         (_____)------------------------------------(_____)"<< endl;
+		cout << "\nIngrese ID del cliente que quiere buscar: ";
+		cin >> user_ID;
+		        file >> ID >> name >> correo >> jornada >> telefono ;
+		while(!file.eof())
+		{
+			if(user_ID == ID)
+			{
+				cout << "                 *============================* "<< endl;
+                cout << "                                              "<< endl;
+                cout << "                   Codigo de boleto: "<< ID << endl;
+                cout << "                   Nombre Clientes : "<< name << endl;
+                cout << "                                              "<< endl;
+                cout << "                 *============================* "<< endl;
+				found++;
+				auxCODE=ID;
+				auxNOMBRE=name;
+			}
+		        file >> ID >> name >> correo >> jornada >> telefono ;
+		}
+		if(found == 0)
+		{
+			cout<<"\n\t\t\t Clientes no encontrado...";
+		}
+		file.close();
+		bitacora bit;
+        codigo="7304";
+        bit.ingreso(nameAdministrador,codigo);
+        }
+    int precio=35;
+    system("cls");
+	fstream file2;
+    cout << "" << endl;
+    cout << "\t\t    Nombre Administrador: " << nameAdministrador << endl;
+    cout << "" << endl;
+    cout << "          __^__                                     __^__"<< endl;
+    cout << "         ( ___ )-----------------------------------( ___ )"<< endl;
+    cout << "          | / |                                     | / |"<< endl;
+    cout << "          | / |    Agregar informacion Clientes     | / |"<< endl;
+    cout << "          |___|                                     |___|"<< endl;
+    cout << "         (_____)-----------------------------------(_____)"<< endl;
+	cout << "\t\t  Codigo boleto del Clientes: "<<auxCODE<< endl;
+	cout << "\t\t  Nombre del Cliente : "<<auxNOMBRE<< endl;
+	cout << "\t\t  Ingresa la cantidad de boletos:";
+	cin >> cantidad;
+	total=cantidad*precio;
+	cout << "\t\t  Ingrese Pelicula a ver S/T/F/B (Spiderman,Transformers,Flash,Barbie) ";
+	cin >> pelicula;
+    system("cls");
+    cout << "=============================================" <<endl;
+    cout << "||     Listo! el Cliente ha Comprado        ||" <<endl;
+    cout << "=============================================" <<endl;
+	if (pelicula=="F")
+    {
+        pelicula="Flash";
+    }
+    if (pelicula=="S")
+    {
+        pelicula="Spiderman";
+    }
+	if (pelicula=="T")
+    {
+        pelicula="Transformers";
+    }
+    if (pelicula=="B")
+    {
+        pelicula="Barbie";
+    }
+    file2.open("Compras.txt", ios::app | ios::out);
+    file2 << std::left << std::setw(14) << auxCODE << std::left << std::setw(12) << auxNOMBRE << std::left << std::setw(12) << cantidad << std::left << std::setw(12) << total << std::left << std::left << std::setw(20)<< pelicula << endl;
+	bitacora bit;
+	codigo="7301";
+	bit.ingreso(nameAdministrador,codigo);
+	file2.close();
+}
+void usuario::desplegarCompras()
+{
+	system("cls");
+	fstream file;
+	string ver;
+	int total = 0;
+    cout << "" << endl;
+    cout << "\t\t    Nombre Administrador: " << nameAdministrador << endl;
+    cout << "" << endl;
+	cout << "                                               __^__                                     __^__"<< endl;
+    cout << "                                              ( ___ )-----------------------------------( ___ )"<< endl;
+    cout << "                                               | / |                                     | / |"<< endl;
+    cout << "                                               | / |   Tabla de Detalles de Compras      | / |"<< endl;
+    cout << "                                               |___|                                     |___|"<< endl;
+    cout << "                                              (_____)-----------------------------------(_____)"<< endl;
+    cout << "===============================================================================================================================================================" << endl;
+    cout << "CB           NOMBRE       CANTIDAD       PRECIO         PELICULA" << endl;
+    cout << "===============================================================================================================================================================" << endl;
+	file.open("Compras.txt",ios::in);
+	if(!file)
+	{
+		cout << "\n\t\t\tNo hay informacion...";
+		file.close();
+	}
+	else
+	{
+		while(!file.eof())
+		{
+			total++;
+			getline(file,ver);
+            cout << ver << endl;
+		}
+		if(total == 0)
+		{
+			cout<<"\n\t\t\tNo hay informacion...";
+		}
+	}
+	file.close();
+    bitacora bit;
+	codigo="7912";
+	bit.ingreso(nameAdministrador,codigo);
 }

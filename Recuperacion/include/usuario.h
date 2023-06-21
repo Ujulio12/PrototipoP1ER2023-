@@ -21,10 +21,12 @@ class usuario
 {
 	private:
 		string IDAdministrador,nameAdministrador,passwordAdministrador,code;
-		string ID,name,password, jornada, correo,curso1,curso2,curso3;
-		int telefono;
+		string ID,name,password, jornada, correo,pelicula;
+		int telefono,cantidad,total;
 	public:
 	    void menuGeneral();
+	    void Compra();
+	    void desplegarCompras();
 	    void agregarAsignacion();
 		void menuAdministrador();
 		void insertarAdministrador();

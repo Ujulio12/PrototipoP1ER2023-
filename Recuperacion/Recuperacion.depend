@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1687361478 source:c:\jemr\prototipop1er2023-\recuperacion\main.cpp
+1687370109 source:c:\jemr\prototipop1er2023-\recuperacion\main.cpp
 	"usuario.h"
 	<iostream>
 	<fstream>
@@ -11,7 +11,7 @@
 	<vector>
 	<chrono>
 
-1687361279 source:c:\jemr\prototipop1er2023-\recuperacion\src\bitacora.cpp
+1687370109 source:c:\jemr\prototipop1er2023-\recuperacion\src\bitacora.cpp
 	"bitacora.h"
 	<iostream>
 	<fstream>
@@ -23,7 +23,7 @@
 	<vector>
 	<chrono>
 
-1687361218 c:\jemr\prototipop1er2023-\recuperacion\include\bitacora.h
+1687370109 c:\jemr\prototipop1er2023-\recuperacion\include\bitacora.h
 	"usuario.h"
 	<iostream>
 	<fstream>
@@ -35,7 +35,7 @@
 	<vector>
 	<chrono>
 
-1687364921 c:\jemr\prototipop1er2023-\recuperacion\include\usuario.h
+1687371528 c:\jemr\prototipop1er2023-\recuperacion\include\usuario.h
 	"usuario.h"
 	"bitacora.h"
 	<iostream>
@@ -48,7 +48,7 @@
 	<vector>
 	<chrono>
 
-1687363745 source:c:\jemr\prototipop1er2023-\recuperacion\src\usuario.cpp
+1687370109 source:c:\jemr\prototipop1er2023-\recuperacion\src\usuario.cpp
 	"usuario.h"
 	"bitacora.h"
 	<iostream>
