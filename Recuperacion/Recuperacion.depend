@@ -35,7 +35,7 @@
 	<vector>
 	<chrono>
 
-1687361258 c:\jemr\prototipop1er2023-\recuperacion\include\usuario.h
+1687363007 c:\jemr\prototipop1er2023-\recuperacion\include\usuario.h
 	"usuario.h"
 	"bitacora.h"
 	<iostream>
@@ -48,7 +48,7 @@
 	<vector>
 	<chrono>
 
-1687361457 source:c:\jemr\prototipop1er2023-\recuperacion\src\usuario.cpp
+1687363745 source:c:\jemr\prototipop1er2023-\recuperacion\src\usuario.cpp
 	"usuario.h"
 	"bitacora.h"
 	<iostream>

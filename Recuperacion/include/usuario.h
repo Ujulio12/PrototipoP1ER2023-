@@ -32,12 +32,12 @@ class usuario
 		void buscarAdministrador();
 		//void menuCatalogos();
 		void Pago();
-		void menuCliente();
-		void insertarCliente();
-		void desplegarCliente();
-		void modificarCliente();
-		void buscarCliente();
-		void borrarCliente();
+		void menuClientes();
+		void insertarClientes();
+		void desplegarClientes();
+		void modificarClientes();
+		void buscarClientes();
+		void borrarClientes();
 		void menuUsuario();
 		/*void insertarUsuario();
 		void desplegarUsuario();

@@ -210,7 +210,7 @@ void usuario::insertarAdministrador()
     switch(Opciones)
     {
     case 1:
-        //menuAlumno();
+        menuClientes();
 		break;
     case 2:
         //bit.desplegarBitacora(nameAdministrador,"7500");
@@ -237,4 +237,348 @@ void usuario::insertarAdministrador()
     }while(Opciones!= 4);
     }
 }
-void
+void usuario::insertarClientes()
+{
+	system("cls");
+	fstream file;
+    cout << "" << endl;
+    cout << "\t\t    Nombre Administrador: " << nameAdministrador << endl;
+    cout << "" << endl;
+    cout << "          __^__                                     __^__"<< endl;
+    cout << "         ( ___ )-----------------------------------( ___ )"<< endl;
+    cout << "          | / |                                     | / |"<< endl;
+    cout << "          | / |    Agregar informacion Clientes     | / |"<< endl;
+    cout << "          |___|                                     |___|"<< endl;
+    cout << "         (_____)-----------------------------------(_____)"<< endl;
+	cout << "\t\t  Ingresa Codigo de Boleto del Clientes: ";
+	cin >> ID;
+	cout << "\t\t  Ingresa Nombre del Clientes : ";
+	cin >> name;
+	cout << "\t\t  Ingresa el correo del Clientes : ";
+	cin >> correo;
+	cout << "\t\t  Ingrese Horario de Reserva T/N (Tarde o Noche) ";
+	cin >> jornada;
+	cout << "\t\t  Ingresa El telefono del Clientes : ";
+	cin >> telefono;
+    system("cls");
+    cout << "=============================================" <<endl;
+    cout << "||     Listo! nuevo Clientes agregado         ||" <<endl;
+    cout << "=============================================" <<endl;
+	if (jornada=="T")
+    {
+        jornada="Tarde";
+    }
+    if (jornada=="N")
+    {
+        jornada="Noche";
+    }
+    file.open("Clientes.txt", ios::app | ios::out);
+    file << std::left << std::setw(14) << ID << std::left << std::setw(12) << name << std::left << std::setw(32) << correo << std::left << std::left << std::setw(20)<< jornada << std::setw(15)<< telefono << endl;
+	bitacora bit;
+	codigo="7301";
+	bit.ingreso(nameAdministrador,codigo);
+	file.close();
+}
+void usuario::desplegarClientes()
+{
+	system("cls");
+	fstream file;
+	string ver;
+	int total = 0;
+    cout << "" << endl;
+    cout << "\t\t    Nombre Administrador: " << nameAdministrador << endl;
+    cout << "" << endl;
+	cout << "                                               __^__                                     __^__"<< endl;
+    cout << "                                              ( ___ )-----------------------------------( ___ )"<< endl;
+    cout << "                                               | / |                                     | / |"<< endl;
+    cout << "                                               | / |   Tabla de Detalles de Clientes     | / |"<< endl;
+    cout << "                                               |___|                                     |___|"<< endl;
+    cout << "                                              (_____)-----------------------------------(_____)"<< endl;
+    cout << "===============================================================================================================================================================" << endl;
+    cout << "CB           NOMBRE       CORREO                           RESERVA         TELEFONO" << endl;
+    cout << "===============================================================================================================================================================" << endl;
+	file.open("Clientes.txt",ios::in);
+	if(!file)
+	{
+		cout << "\n\t\t\tNo hay informacion...";
+		file.close();
+	}
+	else
+	{
+		while(!file.eof())
+		{
+			total++;
+			getline(file,ver);
+            cout << ver << endl;
+		}
+		if(total == 0)
+		{
+			cout<<"\n\t\t\tNo hay informacion...";
+		}
+	}
+	file.close();
+    bitacora bit;
+	codigo="7302";
+	bit.ingreso(nameAdministrador,codigo);
+}
+void usuario::modificarClientes()
+{
+	system("cls");
+	fstream file,file1;
+	string user_ID;
+	int found = 0;
+	cout << "\n-------------------------Modificacion Detalles Usuario-------------------------"<<endl;
+	file.open("Clientes.txt",ios::in);
+	if(!file)
+	{
+		cout << "\n\t\t\tNo hay informacion..,";
+		file.close();
+	}
+	else
+	{   cout << "" << endl;
+	    cout << "\n\tUsuario: " << nameAdministrador << endl << endl;
+		cout << "\n Ingrese ID del usuario que quiere modificar: ";
+		cin >> user_ID;
+		file1.open("Record.txt",ios::app | ios::out);
+		        file >> ID >> name >> correo >> jornada >> telefono ;
+		while(!file.eof())
+		{
+			if(user_ID!=ID)
+			{
+    file << std::left << std::setw(14) << ID << std::left << std::setw(12) << name << std::left << std::setw(32) << correo << std::left << std::left << std::setw(20)<< jornada << std::setw(15)<< telefono << endl;
+			}
+			else
+			{
+				cout << "\t\t\tCodigo del boleto de el Cliente: " << ID << endl;
+				cout << "\t\t\tIngrese Nombre del Cliente: ";
+				cin >> name;
+				cout << "\t\t\tIngrese correo del Cliente: ";
+				cin >> correo;
+				cout << "\t\t\tReserva del Cliente: "<< jornada << endl;
+                cout << "\t\t\tIngrese telefono del Clientes: ";
+				cin >> telefono;
+    file1 << std::left << std::setw(14) << ID << std::left << std::setw(12) << name << std::left << std::setw(32) << correo << std::left << std::left << std::setw(20)<< jornada << std::setw(15)<< telefono << endl;
+				found++;
+			}
+		        file >> ID >> name >> correo >> jornada >> telefono ;
+
+		}
+		file1.close();
+		file.close();
+		remove("Clientes.txt");
+		rename("Record.txt","Clientes.txt");
+        bitacora bit;
+        codigo="7303";
+        bit.ingreso(nameAdministrador,codigo);
+	}
+}
+void usuario::buscarClientes()
+{
+	system("cls");
+	fstream file;
+	int found = 0;
+	file.open("Clientes.txt",ios::in);
+	if(!file)
+	{
+
+		cout << "\n-------------------------Datos del Clientes buscada------------------------" << endl;
+		cout << "\n\t\t\tNo hay informacion...";
+	}
+	else
+	{
+		string user_ID;
+        cout << "" << endl;
+        cout << "\t\t    Nombre Administrador: " << nameAdministrador << endl;
+		cout << "          __^__                                      __^__"<< endl;
+        cout << "         ( ___ )------------------------------------( ___ )"<< endl;
+        cout << "          | / |                                      | / |"<< endl;
+        cout << "          | / |     Datos del Clientes buscado     | / |"<< endl;
+        cout << "          |___|                                      |___|"<< endl;
+        cout << "         (_____)------------------------------------(_____)"<< endl;
+		cout << "\nIngrese ID del cliente que quiere buscar: ";
+		cin >> user_ID;
+		        file >> ID >> name >> correo >> jornada >> telefono ;
+		while(!file.eof())
+		{
+			if(user_ID == ID)
+			{
+				cout << "                 *============================* "<< endl;
+                cout << "                                              "<< endl;
+                cout << "                   Codigo de boleto: "<< ID << endl;
+                cout << "                   Nombre Clientes : "<< name << endl;
+                cout << "                   Correo: "<< correo << endl;
+                cout << "                   Reserva: "<< jornada << endl;
+                cout << "                   Telefono: "<< telefono << endl;
+                cout << "                                              "<< endl;
+                cout << "                 *============================* "<< endl;
+				found++;
+			}
+		        file >> ID >> name >> correo >> jornada >> telefono ;
+		}
+		if(found == 0)
+		{
+			cout<<"\n\t\t\t Clientes no encontrado...";
+		}
+		file.close();
+		bitacora bit;
+        codigo="7304";
+        bit.ingreso(nameAdministrador,codigo);
+	}
+}
+void usuario::borrarClientes()
+{
+	system("cls");
+	fstream file,file1;
+	string user_ID;
+	int found = 0;
+	cout << "\n-------------------------Detalles Usuario a Borrar-------------------------" << endl;
+	file.open("Clientes.txt",ios::in);
+	if(!file)
+	{
+		cout << "\n\t\t\tNo hay informacion...";
+		file.close();
+	}
+	else
+	{   cout << "" << endl;
+	    cout << "\n\tUsuario: " << nameAdministrador << endl << endl;
+		cout << "\n Ingrese el ID del Usuario que quiere borrar: ";
+		cin >> user_ID;
+		file1.open("Record.txt",ios::app | ios::out);
+        file >> ID >> name >> correo >> jornada >> telefono ;
+		while(!file.eof())
+		{
+			if(user_ID!=ID)
+			{
+        file1 << std::left << std::setw(15) << ID << std::left << std::setw(25) << name << std::left << std::setw(15) << correo << std::left << std::left << std::setw(30)<< jornada << std::setw(15)<< telefono << endl;
+			}
+			else
+			{
+				found++;
+				cout << "\n\t\t\tBorrado de informacion exitoso";
+			}
+        file >> ID >> name >> correo >> jornada >> telefono ;
+		}
+		if(found == 0)
+		{
+			cout<<"\n\t\t\t ID Persona no encontrado...";
+		}
+		file1.close();
+		file.close();
+		remove("Clientes.txt");
+		rename("Record.txt","Clientes.txt");
+        bitacora bit;
+        codigo="7305";
+        bit.ingreso(nameAdministrador,codigo);
+	}
+}
+void usuario::menuClientes()
+{
+    int Opciones;
+	char x;
+	do
+    {
+    system("cls");
+    cout << "                                                                                                  "<< endl;
+    cout << "                                                                                                  "<< endl;
+    cout << "                    88        88  88b           d88    ,ad8888ba,                                 "<< endl;
+    cout << "                    88        88  888b         d888   d8''    `'8b                                "<< endl;
+    cout << "                    88        88  88`8b       d8'88  d8'                                          "<< endl;
+	cout << "                    88        88  88 `8b     d8' 88  88                                           "<< endl;
+	cout << "                    88        88  88  `8b   d8'  88  88      88888                                "<< endl;
+	cout << "                    88        88  88   `8b d8'   88  Y8,        88                                "<< endl;
+	cout << "                    Y8a.    .a8P  88    `888'    88   Y8a.    .a88                                "<< endl;
+	cout << "                    `''Y8888Y''   88     `8'     88   `''Y88888P''                                "<< endl;
+    cout << "                                                                                           "<< endl;
+	system("pause");
+	system("cls");
+    bitacora bit;
+	codigo="7300";
+	bit.ingreso(nameAdministrador,codigo);
+    cout << "" << endl;
+    cout << "\t\t    Nombre Administrador: " << nameAdministrador << endl;
+    cout << "" << endl;
+    cout << "          __^__                                     __^__"<< endl;
+    cout << "         ( ___ )===================================( ___ )"<< endl;
+    cout << "          | / |                                     | / |"<< endl;
+    cout << "          | / |             Clientes UMG             | / |"<< endl;
+    cout << "          |___|                                     |___|"<< endl;
+    cout << "         (_____)===================================(_____)"<< endl;
+    cout << "\        ================================================="<< endl;
+    cout << "                 *===============================*"<< endl;
+    cout << "                 |   Porfavor, elije una opcion  |"<< endl;
+    cout << "                 |                               |"<< endl;
+    cout << "                 | 1. Ingresar Clientes          |"<< endl;
+    cout << "                 | 2. Desplegar Clientes         |"<< endl;
+    cout << "                 | 3. Modificar Clientes         |"<< endl;
+    cout << "                 | 4. Buscar Clientes            |"<< endl;
+    cout << "                 | 5. Borrar Clientes            |"<< endl;
+    cout << "                 | 6. Regresar al inicio         |"<< endl;
+    cout << "                 | 7. Salir del sistema          |"<< endl;
+    cout << "                 |                               |"<< endl;
+    cout << "                 *===============================*"<< endl;
+    cout << "                    Ingresa una Opcion: ";
+    cin >> Opciones;
+    switch(Opciones)
+    {
+    case 1:
+    	do
+    	{
+    		insertarClientes();
+    		cout << "          __^__                                     __^__"<< endl;
+            cout << "         ( ___ )===================================( ___ )"<< endl;
+            cout << "          | / |                                     | / |"<< endl;
+            cout << "          | / |    Desea gregar un nuevo Cliente?   | / |"<< endl;
+            cout << "          |___|                                     |___|"<< endl;
+            cout << "         (_____)===================================(_____)"<< endl;
+            cout << "         =================================================" <<endl;
+            cout << "                Pulsa Y para si ||| Pulsa N para No     " <<endl;
+            cout << "         =================================================" <<endl;
+            cout << "                Selecciona una respuesta: ";
+    		cin >> x;
+		}while(x == 'y'||x == 'Y');
+		break;
+	case 2:
+		desplegarClientes();
+		break;
+	case 3:
+		modificarClientes();
+		break;
+	case 4:
+		buscarClientes();
+		break;
+	case 5:
+		borrarClientes();
+		break;
+    case 6:
+        system("cls");
+        cout << "\t\t\tNombre Administrador: " << nameAdministrador << endl;
+        cout << "" << endl;
+        cout << "          __^__                                     __^__"<< endl;
+	    cout << "         ( ___ )-----------------------------------( ___ )"<< endl;
+        cout << "          | / |                                     | / |"<< endl;
+        cout << "          | / |     Muchas gracias por ingresar     | / |"<< endl;
+        cout << "          |___|    Redireccionando al inicio....    |___|"<< endl;
+        cout << "          |___|                                     |___|"<< endl;
+        cout << "         (_____)-----------------------------------(_____)"<< endl;
+                break;
+	case 7:
+	    system("cls");
+	    bitacora bit;
+        codigo="7999";
+        bit.ingreso(nameAdministrador,codigo);
+        cout << "\t\t\tNombre Administrador: " << nameAdministrador << endl;
+        cout << "" << endl;
+	    cout << "          __^__                                     __^__"<< endl;
+        cout << "         ( ___ )-----------------------------------( ___ )"<< endl;
+        cout << "          | / |                                     | / |"<< endl;
+        cout << "          | / |     Muchas gracias por ingresar     | / |"<< endl;
+        cout << "          |___|            vuelva pronto            |___|"<< endl;
+        cout << "          |___|                                     |___|"<< endl;
+        cout << "         (_____)-----------------------------------(_____)"<< endl;
+        exit(0);
+	default:
+		cout << "\n\t\t\t Opcion invalida...Por favor prueba otra vez..";
+	}
+	getch();
+    }while(Opciones!= 6);
+}
