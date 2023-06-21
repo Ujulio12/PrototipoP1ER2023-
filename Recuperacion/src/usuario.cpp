@@ -237,3 +237,4 @@ void usuario::insertarAdministrador()
     }while(Opciones!= 4);
     }
 }
+void
