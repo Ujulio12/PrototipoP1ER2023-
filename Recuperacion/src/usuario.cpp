@@ -213,7 +213,7 @@ void usuario::insertarAdministrador()
         menuClientes();
 		break;
     case 2:
-        //bit.desplegarBitacora(nameAdministrador,"7500");
+        menuReportes();
         break;
     case 3:
 
@@ -236,6 +236,83 @@ void usuario::insertarAdministrador()
 	getch();
     }while(Opciones!= 4);
     }
+}
+void usuario::menuReportes()
+{
+     int Opciones;
+	char x;
+	do{
+    system("cls");
+	std::cout << "**=========================================================================================================**" << std::endl;
+	std::cout << "||       BBBBBB   IIII   EEEEEEE  NN     NN   VV     VV   EEEEEEE   NN    NN   IIII   DDDDDD   OOOOOOO     ||" << std::endl;
+    std::cout << "||       BB   BB   II    EE       NNNN   NN   VV     VV   EE        NNNN  NN    II    DD   DD  OO   OO     ||" << std::endl;
+    std::cout << "||       BBBBBB    II    EEEEE    NN NN  NN    VV   VV    EEEEE     NN NN NN    II    DD   DD  OO   OO     ||" << std::endl;
+    std::cout << "||       BB   BB   II    EE       NN   NNNN     VV VV     EE        NN  NNNN    II    DD   DD  OO   OO     ||" << std::endl;
+    std::cout << "||       BBBBBB   IIII   EEEEEEE  NN    NNN       V       EEEEEEE   NN   NNN   IIII   DDDDDD   OOOOOOO     ||" << std::endl;
+    std::cout << "**=========================================================================================================**" << std::endl;
+    std::cout << "||                            Bienvenido, " << nameAdministrador << " al programa de nomina                                     ||" << std::endl;
+    std::cout << "||       Esperamos que esta herramienta sea de utilidad para calcular los salarios de los empleados        ||" << std::endl;
+    std::cout << "**=========================================================================================================**" << std::endl;
+    std::cout << std::endl;
+    system("pause");
+    system("cls");
+    cout << "" << endl;
+    cout << "\t\t    Nombre Administrador: " << nameAdministrador << endl;
+    cout << "          __^__                                     __^__"<< endl;
+    cout << "         ( ___ )===================================( ___ )"<< endl;
+    cout << "          | / |                                     | / |"<< endl;
+    cout << "          | / |            MENU DE INFORMES         | / |"<< endl;
+    cout << "          |___|                                     |___|"<< endl;
+    cout << "         (_____)===================================(_____)"<< endl;
+    cout << "\        ================================================="<< endl;
+    cout << "                 *===============================*"<< endl;
+    cout << "                 |   Porfavor, elije una opcion  |"<< endl;
+    cout << "                 |                               |"<< endl;
+    cout << "                 | 1. Clientes                   |"<< endl;
+    cout << "                 | 2. Bitacora                   |"<< endl;
+    cout << "                 | 3. Regresar al menu anterior  |"<< endl;
+    cout << "                 | 4. Salir del sistema          |"<< endl;
+    cout << "                 |                               |"<< endl;
+    cout << "                 *===============================*"<< endl;
+    cout << "                      Ingresa una Opcion: ";
+    cin >> Opciones;
+    switch(Opciones)
+    {
+    case 1:
+        desplegarClientes();
+		break;
+    case 2:
+        bit.desplegarBitacora(nameAdministrador,"7500");
+        break;
+    case 3:
+        system("cls");
+        cout << "\t\t\tNombre Administrador: " << nameAdministrador << endl;
+        cout << "" << endl;
+        cout << "          __^__                                     __^__"<< endl;
+	    cout << "         ( ___ )-----------------------------------( ___ )"<< endl;
+        cout << "          | / |                                     | / |"<< endl;
+        cout << "          | / |     Muchas gracias por ingresar     | / |"<< endl;
+        cout << "          |___|    Redireccionando al inicio....    |___|"<< endl;
+        cout << "          |___|                                     |___|"<< endl;
+        cout << "         (_____)-----------------------------------(_____)"<< endl;
+                break;
+	case 4:
+	    system("cls");
+	    cout << "          __^__                                     __^__"<< endl;
+        cout << "         ( ___ )===================================( ___ )"<< endl;
+        cout << "          | / |                                     | / |"<< endl;
+        cout << "          | / |     Muchas gracias por ingresar     | / |"<< endl;
+        cout << "          |___|            vuelva pronto            |___|"<< endl;
+        cout << "          |___|                                     |___|"<< endl;
+        cout << "         (_____)===================================(_____)"<< endl;
+		exit(0);
+	default:
+	    std::cout << "=====================================================" << std::endl;
+        std::cout << "||  Opcion invalida...Por favor prueba otra vez..  ||" << std::endl;
+        std::cout << "=====================================================" << std::endl;
+	}
+	getch();
+    }while(Opciones!= 3);
 }
 void usuario::insertarClientes()
 {

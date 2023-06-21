@@ -30,6 +30,7 @@ class usuario
 		void insertarAdministrador();
 		void desplegarAdministrador();
 		void buscarAdministrador();
+		void menuReportes();
 		//void menuCatalogos();
 		void Pago();
 		void menuClientes();
