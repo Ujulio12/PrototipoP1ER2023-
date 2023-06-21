@@ -1,2 +1,3 @@
-001           Julio       JUL@gmail.com                   Tarde               99991111       
-003           Yoel        Yoel1@gmail.com                 Noche               11111122       
+001           Carlos      Carlos@gmail.com                Tarde               12341234       
+001            Julioo                   Jul@gmail.com  Tarde                         12341234       
+012           Eduardo     Eddu@gmail.com                  Tarde               12341234       
